@@ -1,0 +1,49 @@
+<div>
+<div>
+  <label>Search Keyword: </label><input class="inputText" #box (keyup)="onKey(box.value)">
+</div>
+
+<div>
+  <table>
+    <thead>
+    <tr>
+      <th (click)="sortData('Position', positionToggle = !positionToggle)">Position<img src="../assets/sort.JPG"></th>
+      <th (click)="sortData('Name', nameToggle = !nameToggle)">Name<img src="../assets/sort.JPG"></th>
+      <th (click)="sortData('Weight', weightToggle = !weightToggle)">Weight<img src="../assets/sort.JPG"></th>
+      <th (click)="sortData('Symbol', symbolToggle = !symbolToggle)">Symbol<img src="../assets/sort.JPG"></th>
+    </tr>
+    </thead>
+    <tbody *ngFor = "let data of items; let i = index">
+    <tr *ngIf="i >= startIndex && i <= endIndex">
+      <td>{{data.position}}</td>
+      <td>{{data.name}}</td>
+      <td>{{data.weight}}</td>
+      <td>{{data.symbol}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+  <div>
+  <span class="left">
+  <label>Select Page Size: </label>
+  <select (change)="setRows($event.target)">
+    <option value="5">5</option>
+    <option value="10">10</option>
+    <option value="15">15</option>
+    <option value="20">20</option>
+  </select>
+  </span>
+
+<div class="center" *ngIf="pages.length > 1">
+  <span class="pagination" *ngFor="let page of pages; let i = index;">
+    <a class="box" *ngIf="i=== 0" href="" (click)="previous($event)">&laquo;</a>
+    <span class="active" *ngIf="page === currentPage" href="" (click)="setCurrent($event,page)">{{page}}</span>
+    <a *ngIf="page !== currentPage" href="" (click)="setCurrent($event,page)">{{page}}</a>
+    <a class="box" *ngIf="i ===pages.length-1" href="" (click)="next($event)">&raquo;</a>
+  </span>
+  
+</div>
+  </div>
+
+</div>
